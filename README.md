@@ -6,12 +6,13 @@ Small React + Vite app for browsing HRC preflop solver trees through a local Nod
 
 - Node.js 20+ recommended
 - npm
-- Solver data folders such as `10bb`, `12bb`, `15bb`, `20bb`, and `25bb`
+- `unzip` for extracting the bundled solver data archive
 
 ## Install
 
 ```bash
 npm install
+npm run data:unpack
 ```
 
 ## Run locally
@@ -25,7 +26,19 @@ The Vite app runs on the local URL printed by Vite, usually `http://localhost:51
 
 ## Data
 
-The app needs the solver data folders to run. The data folders are intentionally not committed to GitHub because they are large. Each stack folder must contain:
+The app needs the solver data folders to run. The raw data folders are large and ignored by Git, so the repository includes them as a compressed archive:
+
+```text
+data/hrc-preflop-data.zip
+```
+
+Extract it before running the app:
+
+```bash
+npm run data:unpack
+```
+
+This creates the required stack folders in the project root. Each stack folder must contain:
 
 ```text
 15bb/
@@ -41,13 +54,10 @@ By default, the server reads data from the project root. You can keep large data
 HRC_DATA_ROOT=/path/to/hrc-data npm run dev
 ```
 
-This is useful if the data is stored separately, for example in a Hugging Face Dataset.
+On Windows PowerShell without `unzip`, extract manually:
 
-Example with Hugging Face CLI after uploading the data to a Dataset repo:
-
-```bash
-hf download Bangchis/poker-solver-mvp-data --type dataset --local-dir ./data
-HRC_DATA_ROOT=./data npm run dev
+```powershell
+Expand-Archive -Path data/hrc-preflop-data.zip -DestinationPath . -Force
 ```
 
 ## Validate Data

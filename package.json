@@ -6,6 +6,7 @@
   "scripts": {
     "api": "node server/index.js",
     "dev": "node server/index.js & vite --host 0.0.0.0",
+    "data:unpack": "unzip -oq data/hrc-preflop-data.zip -d .",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "validate-data": "node server/validateData.js"
